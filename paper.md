@@ -61,8 +61,8 @@ We observe that the split criterion is the difference of OLS loss functions befo
 $$
 \begin{aligned}
 v_{n,\mathbf Q}^{DART}((d,c))  =& %v_{n,\bQ}^{DART}(\mathfrak{C}^{(k-1)},l_1,(d,c)) =&
-\frac{1}{n} \Bigg[\left(\mathbf{Y} - \mathbf{Z}^{(0)}\bm{\hat{\beta}}_{GLS}(\mathbf Z^{(0)}) \right)^\top \bQ\left(\mathbf{Y} - \mathbf{Z}^{(0)}\bm{\hat{\beta}}_{GLS}(\mathbf Z^{(0)}) \right)\\ 
--&\left(\mathbf{Y} - \mathbf{Z}\bm{\hat{\beta}}_{GLS}(\mathbf Z) \right)^\top \bQ\left(\mathbf{Y} - \mathbf{Z}\bm{\hat{\beta}}_{GLS}(\mathbf Z) \right) \Bigg].
+\frac{1}{n} \Bigg[\left(\mathbf{Y} - \mathbf{Z}^{(0)}\boldsymbol{\hat{\beta}}_{GLS}(\mathbf Z^{(0)}) \right)^\top \mathbf Q\left(\mathbf{Y} - \mathbf{Z}^{(0)}\boldsymbol{\hat{\beta}}_{GLS}(\mathbf Z^{(0)}) \right)\\ 
+-&\left(\mathbf{Y} - \mathbf{Z}\boldsymbol{\hat{\beta}}_{GLS}(\mathbf Z) \right)^\top \mathbf Q\left(\mathbf{Y} - \mathbf{Z}\boldsymbol{\hat{\beta}}_{GLS}(\mathbf Z) \right) \Bigg].
 $$
 
 
