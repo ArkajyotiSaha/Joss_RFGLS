@@ -49,7 +49,23 @@ spatial correlation in the data [CRAN Task View: Analysis of Spatial Data](https
 
 We provide a brief overview of the user functionality of the package. The package vignette delves deeper into this and demonstrates with example how the functions available in `RandomForestsGLS` can be used for non-linear regression analysis of dependent data. Specific functions are discussed in much detail in the code documentation of the package.
 
-## 
+## RF to RF-GLS: Accounting for correlation structure
+
+In classical RF, each node is split by optimizing the CART split criterion in @breiman1984classification. It can be rewritten in the following way. 
+$$
+(d^*,c^*,\hat{\boldsymbol\beta}) = \underset{d,c,\boldsymbol{\beta} \in \mathbb{R}^{K+1}}{\arg \max} \frac{1}{n} \left( \|\mathbf{Y} - \mathbf Z^{(0)}\widehat \boldsymbol{\beta}^{(0)}\|_2^2 - \|\mathbf Y - \mathbf Z \boldsymbol{\beta}\|_2^2 \right).
+$$
+where, $\mathbf Z^{(0)}$ and $\mathbf Z$ are the membersip matrices for the leaf nodes before and after the potential node split. $(d^*,c^*)$ denotes the optimal cut, with $d^*$ and $c^*$ being the optimal cut direction and cutoff point respectively and $\hat{\boldsymbol{\beta}}$  denotes the node representatives of the leaf nodes. 
+We observe that the split criterion is the difference of OLS loss functions before and after the cut with the design matrix of membership of the leaf nodes. We can incorporate the correlation structure of the data in the split criterion by replacing the OLS loss with GLS loss. The modified split criterion can be rewritten as:
+
+$$
+\begin{aligned}
+v_{n,\mathbf Q}^{DART}((d,c))  =& %v_{n,\bQ}^{DART}(\mathfrak{C}^{(k-1)},l_1,(d,c)) =&
+\frac{1}{n} \Bigg[\left(\mathbf{Y} - \mathbf{Z}^{(0)}\bm{\hat{\beta}}_{GLS}(\mathbf Z^{(0)}) \right)^\top \bQ\left(\mathbf{Y} - \mathbf{Z}^{(0)}\bm{\hat{\beta}}_{GLS}(\mathbf Z^{(0)}) \right)\\ 
+-&\left(\mathbf{Y} - \mathbf{Z}\bm{\hat{\beta}}_{GLS}(\mathbf Z) \right)^\top \bQ\left(\mathbf{Y} - \mathbf{Z}\bm{\hat{\beta}}_{GLS}(\mathbf Z) \right) \Bigg].
+$$
+
+
 
 ## Spatial Data
 ### Model
@@ -59,6 +75,7 @@ $$
 y_i = m(\mathbf{x}_i) + w(\mathbf{s}_i) + \epsilon_i;
 $$
 where, $y_i, \mathbf{x}_i$ respectively denotes the observed response and the covariate corresponding to the $i^{th}$ observed location $\mathbf{s}_i$. $m(\mathbf{x}_i)$ denotes the covariate effect, spatial random effect, $w (\mathbf{s})$ accounts for spatial dependence beyond covariates, and $\mathbf{\epsilon}$ accounts for the independent and identically distributed random Gaussian noise. 
+
 
 
 ### Fitting
