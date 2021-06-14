@@ -53,9 +53,9 @@ We provide a brief overview of the user functionality of the package. The packag
 
 In classical RF, each node is split by optimizing the CART split criterion in @breiman1984classification. It can be rewritten in the following way. 
 $$
-(d^*,c^*,\hat{\boldsymbol\beta}) = \underset{d,c,\boldsymbol{\beta} \in \mathbb{R}^{K+1}}{\arg \max} \frac{1}{n} \left( \|\mathbf{Y} - \mathbf Z^{(0)}\widehat \boldsymbol{\beta}^{(0)}\|_2^2 - \|\mathbf Y - \mathbf Z \boldsymbol{\beta}\|_2^2 \right).
+(d^*,c^*,\hat{\boldsymbol\beta}) = \underset{d,c,\boldsymbol{\beta} \in \mathbb{R}^{K+1}}{\arg \max} \frac{1}{n} \left( \|\mathbf{Y} - \mathbf Z^{(0)}\widehat {\boldsymbol{\beta}}^{(0)}\|_2^2 - \|\mathbf Y - \mathbf Z \boldsymbol{\beta}\|_2^2 \right).
 $$
-where, $\mathbf Z^{(0)}$ and $\mathbf Z$ are the membersip matrices for the leaf nodes before and after the potential node split. $(d^*,c^*)$ denotes the optimal cut, with $d^*$ and $c^*$ being the optimal cut direction and cutoff point respectively and $\hat{\boldsymbol{\beta}}$  denotes the node representatives of the leaf nodes. 
+where, $\mathbf Z^{(0)}$ and $\mathbf Z$ are the membersip matrices for the leaf nodes before and after the potential node split. $(d^*,c^*)$ denotes the optimal cut, with $d^*$ and $c^*$ being the optimal cut direction and cutoff point respectively, $\hat{\boldsymbol{\beta}}^{(0)}$ and $\hat{\boldsymbol{\beta}}$ denote the node representatives of the leaf nodes before and after the potential node splitting. 
 We observe that the split criterion is the difference of OLS loss functions before and after the cut with the design matrix of membership of the leaf nodes. We can incorporate the correlation structure of the data in the split criterion by replacing the OLS loss with GLS loss. The modified split criterion can be rewritten as:
 
 $$
