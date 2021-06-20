@@ -124,7 +124,11 @@ Anther aspect of optimization of the proposed algorithm involves clever implemen
 
 ![Serial update of membership and cutoff .\label{fig:example}](figure.png)
 
-Since a serial update only affects one row in two columns of $\mathbf Z$ (corresponding to the newly formed nodes), the resulting correlation adjuted effective design matrix ($\mathbf Q ^{1/2} \mathbf Z$) only experiences changes in the corresponding two columns and the rows corresonding to the nearest neighbors of the data point under consideration. We efficiently implement this in the package which provides efficiency over brute force recomputation of the effective design matrix for each serial update.
+Since a serial update only affects one row in two columns of $\mathbf Z$ (corresponding to the newly formed nodes, an example of changes in $\mathbf Z$ corresponding to the changes in \autoref{fig:example} is demonstrated in \autoref{fig:example2}, here we note that the matrix components are unordered, hence the serial update will ot follow the index ordering), the resulting correlation adjuted effective design matrix ($\mathbf Q ^{1/2} \mathbf Z$) only experiences changes in the corresponding two columns and the rows corresonding to the nearest neighbors of the data point under consideration. We efficiently implement this in the package which provides efficiency over brute force recomputation of the effective design matrix for each serial update.  The process is graphically demonstrated in \autoref{fig:example3}.
+
+![Serial update of Z .\label{fig:example2}](figure2.png)
+
+![Changes in correlation adjusted design matrix .\label{fig:example3}](figure3.png)
 
 # References
 
