@@ -55,7 +55,9 @@ In classical RF, each node is split by optimizing the CART split criterion in @b
 $$
 v_{n}^{CART}((d,c)) =  \frac{1}{n} \left( \|\mathbf{Y} - \mathbf Z^{(0)}\boldsymbol{\hat{\beta}}(\mathbf Z^{(0)})\|_2^2 - \|\mathbf Y - \mathbf Z \boldsymbol{\hat{\beta}}(\mathbf Z)\|_2^2 \right).
 $$
-where, $\mathbf Z^{(0)}$ and $\mathbf Z$ are the membersip matrices for the leaf nodes before and after the potential node split. $(d,c)$ denotes a potentil cut, with $d$ and $c$ being the cut direction and cutoff point respectively, $\boldsymbol{\hat{\beta}} (\mathbf Z)$ are the leaf node representatives corresponding to a design matrix $\mathbf Z$ and is given by $$\boldsymbol{\hat{\beta}} (\mathbf Z) = \left(\mathbf Z ^\top \mathbf Z right)^{-1} \mathbf Z ^\top \mathbf y$$.
+where, $\mathbf Z^{(0)}$ and $\mathbf Z$ are the membersip matrices for the leaf nodes before and after the potential node split. $(d,c)$ denotes a potentil cut, with $d$ and $c$ being the cut direction and cutoff point respectively, $\boldsymbol{\hat{\beta}} (\mathbf Z)$ are the leaf node representatives given by OLS estimates corresponding to design matrix $\mathbf Z$ and can be qritten as: 
+
+$$\boldsymbol{\hat{\beta}} (\mathbf Z) = \left(\mathbf Z ^\top \mathbf Z \right)^{-1} \mathbf Z ^\top \mathbf y$$.
 
 We observe that the split criterion is the difference of OLS loss functions before and after the cut with the design matrix of membership of the leaf nodes. We can incorporate the correlation structure of the data in the split criterion by replacing the OLS loss with GLS loss. The modified split criterion can be rewritten as:
 
@@ -64,7 +66,9 @@ v_{n,\mathbf Q}^{DART}((d,c)) =
 \frac{1}{n} \Bigg[\left(\mathbf{Y} - \mathbf{Z}^{(0)}\boldsymbol{\hat{\beta}}_{GLS}(\mathbf Z^{(0)}) \right)^\top \mathbf Q\left(\mathbf{Y} - \mathbf{Z}^{(0)}\boldsymbol{\hat{\beta}}_{GLS}(\mathbf Z^{(0)}) \right)-\left(\mathbf{Y} - \mathbf{Z}\boldsymbol{\hat{\beta}}_{GLS}(\mathbf Z) \right)^\top \mathbf Q\left(\mathbf{Y} - \mathbf{Z}\boldsymbol{\hat{\beta}}_{GLS}(\mathbf Z) \right) \Bigg].
 $$
 
+where, $\mathbf Q$ is the working covariance matrix and $\boldsymbol{\hat{\beta}}_{GLS} (\mathbf Z)$ are the leaf node representatives given by the GLS estimates corresponding to design matrix $\mathbf Z$ and can be written as follows:
 
+$$\boldsymbol{\hat{\beta}}_{GLS} (\mathbf Z) = \left(\mathbf Z ^\top \mathbf Q \mathbf Z \right)^{-1} \mathbf Z ^\top \mathbf Q \mathbf y$$
 
 ## Spatial Data
 ### Model
