@@ -59,8 +59,7 @@ where, $\mathbf Z^{(0)}$ and $\mathbf Z$ are the membersip matrices for the leaf
 We observe that the split criterion is the difference of OLS loss functions before and after the cut with the design matrix of membership of the leaf nodes. We can incorporate the correlation structure of the data in the split criterion by replacing the OLS loss with GLS loss. The modified split criterion can be rewritten as:
 
 $$
-\begin{aligned}
-v_{n,\mathbf Q}^{DART}((d,c))  =& %v_{n,\bQ}^{DART}(\mathfrak{C}^{(k-1)},l_1,(d,c)) =&
+v_{n,\mathbf Q}^{DART}((d,c))=v_{n,\bQ}^{DART}(\mathfrak{C}^{(k-1)},l_1,(d,c)) = 
 \frac{1}{n} \Bigg[\left(\mathbf{Y} - \mathbf{Z}^{(0)}\boldsymbol{\hat{\beta}}_{GLS}(\mathbf Z^{(0)}) \right)^\top \mathbf Q\left(\mathbf{Y} - \mathbf{Z}^{(0)}\boldsymbol{\hat{\beta}}_{GLS}(\mathbf Z^{(0)}) \right)\\ 
 -&\left(\mathbf{Y} - \mathbf{Z}\boldsymbol{\hat{\beta}}_{GLS}(\mathbf Z) \right)^\top \mathbf Q\left(\mathbf{Y} - \mathbf{Z}\boldsymbol{\hat{\beta}}_{GLS}(\mathbf Z) \right) \Bigg].
 $$
