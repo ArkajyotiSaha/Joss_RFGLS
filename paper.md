@@ -88,7 +88,8 @@ where, $y_i, \mathbf{x}_i$ respectively denotes the observed response and the co
 In the spatial mixture model setting, the package `RandomForestsGLS` allows for fitting $m(.)$ using RF-GLS using `RFGLS_estimate_spatial`. Spatial random effects are modeled using GP as is the practice. For model fitting, we use the computationally convenient Nearest Neighbor Gaussian Process (NNGP) [@nngp]. If the covariance parameters are unknown the code automatically estimates them from the specified covariance model and uses them in model fitting.
 
 With coordinates `coords`, response `y` and the covariates `x`, we can fit RF-GLS for spatial data as:
-```{r model_fit, message=FALSE, warning=FALSE, eval = FALSE}
+
+```
 est <- RFGLS_estimate_spatial(coords, y, x)
 ```
 
@@ -97,12 +98,14 @@ est <- RFGLS_estimate_spatial(coords, y, x)
 Given a fitted model and the covariates `RFGLS_predict` predicts the covariate effects given a new covariate value. We also offer spatial prediction at new locations with `RFGLS_predict_spatial` which performs a non-linear kriging by combining the non-linear mean estimate from the covariate effects in `RFGLS_predict` and spatial kriging estimate from the [BRISC](https://CRAN.R-project.org/package=BRISC).
 
 With new covarates `Xtest` and fitted RF-GLS model `est`, the covariate effect can be predicted using
-```{r model_estimate, message=FALSE, warning=FALSE, eval=FALSE}
+
+```
 RFGLS_predict <- RFGLS_predict(est, Xtest)
 ```
 
 The spatial prediction at new locations `Coordstest`, can be obtained through 
-```{r prediction_spatial, message=FALSE, warning=FALSE, eval=FALSE}
+
+```
 RFGLS_predict_spatial <- RFGLS_predict_spatial(est, Xtest, Coordstest)
 ```
 
@@ -121,7 +124,8 @@ where, $y_i, \mathbf{x}_i$ denotes the response and the covariate corresponding 
 In the AR time series scenario, the package `RandomForestsGLS` allows for fitting $m(.)$ using RF-GLS with `RFGLS_estimate_timeseries`. RF-GLS exploits the sparsity of the closed form precision matrix of the AR process for model fitting and prediction of mean function $m(.)$. If the AR model parameters are unknown the code automatically estimates them from AR models with specified lags.
 
 With response `y` and the covariates `x`, we can fit RF-GLS for temporal data as:
-```{r model_fit_temporal, message=FALSE, warning=FALSE, eval = FALSE}
+
+```
 est <- RFGLS_estimate_timeseries(y, x)
 ```
 
