@@ -162,7 +162,7 @@ In this package, we have developed an efficient, parallel implementation of RF-G
 
 # Acknowledgements
 
-AS and AD were supported by NSF award DMS-1915803.
+AS and AD were supported by NSF award DMS-1915803. SB was supported by an NSF award DMS-1812128, and an NIH award R01GM135926.
 
 # References
 
