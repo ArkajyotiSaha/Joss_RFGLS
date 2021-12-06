@@ -52,7 +52,8 @@ Additionally, these only focus on prediction and are unable to estimate the cova
 
 # The RandomForestsGLS package
 
-We provide a brief overview of the user functionality of the package. The package [vignette](https://cran.r-project.org/web/packages/RandomForestsGLS/vignettes/RandomForestsGLS_user_guide.pdf) delves deeper into this and demonstrates with example how the functions available in <br /> `RandomForestsGLS` can be used for non-linear regression analysis of dependent data. Specific functions are discussed in detail in the code documentation of the package.
+We provide a brief overview of the user functionality of the package. The package [vignette](https://cran.r-project.org/web/packages/RandomForestsGLS/vignettes/RandomForestsGLS_user_guide.pdf) delves deeper into this and demonstrates with example how the functions available in <br />
+`RandomForestsGLS` can be used for non-linear regression analysis of dependent data. Specific functions are discussed in detail in the code documentation of the package.
 
 ## RF to RF-GLS: Accounting for correlation structure
 
