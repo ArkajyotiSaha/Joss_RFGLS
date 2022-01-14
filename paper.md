@@ -20,7 +20,7 @@ affiliations:
    index: 2
  - name: Department of Biostatistics, Johns Hopkins Bloomberg School of Public Health
    index: 3
-date: 5 December 2021
+date: 14 January 2022
 bibliography: paper.bib
 ---
 
