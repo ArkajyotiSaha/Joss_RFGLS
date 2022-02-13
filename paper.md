@@ -20,24 +20,24 @@ affiliations:
    index: 2
  - name: Department of Biostatistics, Johns Hopkins Bloomberg School of Public Health
    index: 3
-date: 26 January 2022
+date: 12 February 2022
 bibliography: paper.bib
 ---
 
 # Summary
-With the modern advancements in geographical information systems, remote sensing technologies, low-cost sensors, we are increasingly encountering datasets, where we need to account for spatial/serial dependence. Dependent observations $(y_1, y_2, \cdots, y_n)$ with covariates $(\mathbf x_1,\ldots,\mathbf x_n)$ can be formulated as $y_i = f(\mathbf x_i) + \epsilon_i$, where $f(\mathbf x_i)$ is mean component and $\epsilon_i$ accounts for the dependency in data. We assume, dependence is captured through covariance function of correlated stochastic process $\epsilon_i$ (second order dependence). The correlation is a function of "spatial distance" or "time-lag" between two observations. 
+With the modern advancements in geographical information systems, remote sensing technologies, low-cost sensors, we are increasingly encountering datasets, where we need to account for spatial/serial dependence. Dependent observations $(y_1, y_2, \cdots, y_n)$ with covariates $(\mathbf x_1,\ldots,\mathbf x_n)$ can be modeled non-parametrically as $y_i = m(\mathbf x_i) + \epsilon_i$, where $f(\mathbf x_i)$ is mean component and $\epsilon_i$ accounts for the dependency in data. We assume, dependence is captured through covariance function of correlated stochastic process $\epsilon_i$ (second order dependence). The correlation is typically a function of "spatial distance" or "time-lag" between two observations. 
 
-Unlike linear regressions, non-linear Machine Learning (ML) methods can capture complex interactions among the variables, but often fail to account for the dependence structure, resulting in sub-optimal estimation. Specialized software for spatial/temporal data properly models data correlation, but lacks flexibility in modeling mean component. `RandomForestsGLS` bridges the gap through a novel rendition of Random Forests (RF); namely, RF-GLS, by explicitly modeling the spatial/serial data correlation in the RF fitting procedure to substantially improve estimation of the mean function. Additionally, `RandomForestsGLS` leverages kriging to perform predictions at new locations for geo-spatial data.
+Unlike linear regressions, non-linear Machine Learning (ML) methods for estimating the regression function $m$ can capture complex interactions among the variables. However, they often fail to account for the dependence structure, resulting in sub-optimal estimation. On the other hand, specialized software for spatial/temporal data properly models data correlation, but lacks flexibility in modeling mean function $m$ by restricting to linear models. `RandomForestsGLS` bridges the gap through a novel rendition of Random Forests (RF); namely, RF-GLS, by explicitly modeling the spatial/serial data correlation in the RF fitting procedure to substantially improve estimation of the mean function. Additionally, `RandomForestsGLS` leverages kriging to perform predictions at new locations for geo-spatial data.
 
 # Statement of need
-`RandomForestsGLS` is a statistical machine learning oriented [R](https://cran.r-project.org) package for fitting RF-GLS on dependent data. RF-GLS algorithm described in [@saha2021random] involves computationally intensive linear algebra operations in nested loops which are especially slow in an interpreted language like `R`. `RandomForestsGLS` efficiently implements RF-GLS algorithm by using of low-level language  with an user friendly interface in `R`, which is computational software of choice (free under GNU General Public License) in statistics community. `RandomForestsGLS` focuses on fast, parallelizable implementations of RF-GLS for spatial and time series data, which includes popular choices for covariance functions for both spatial (Matérn GP) and time series (autoregressive) model. The package is primarily designed to be used by researchers associated with the fields of statistical machine learning, spatial statistics, time series analysis, and scientific applications of them. A significant part of the code has already been used in @saha2021random. With the combination of speed and ease-of-use that `RandomForestsGLS` brings to the table regarding non-linear regression analysis in dependent data, we hope to see this package being used in a plethora of future scientific and methodological explorations.
+`RandomForestsGLS` is a statistical machine learning oriented [R](https://cran.r-project.org) package for fitting RF-GLS on dependent data. RF-GLS algorithm described in [@saha2021random] involves computationally intensive linear algebra operations in nested loops which are especially slow in an interpreted language like `R`. `RandomForestsGLS` efficiently implements RF-GLS algorithm by using of low-level language  with an user friendly interface in `R`, which is a widely popular computational software (free under GNU General Public License) in the statistics community. `RandomForestsGLS` focuses on fast, parallelizable implementations of RF-GLS for spatial and time series data, which includes popular choices for covariance functions for both spatial (Matérn GP) and time series (autoregressive) data. The package is primarily designed to be used by researchers associated with the fields of statistical machine learning, spatial statistics, time series analysis, and scientific applications of them. A significant part of the code has already been used in @saha2021random. With the combination of speed and ease-of-use that `RandomForestsGLS` brings to the table regarding non-linear regression analysis in dependent data, we hope to see this package being used in a plethora of future scientific and methodological explorations.
 
 # State of the field
 
 A number of `R` packages implement classical RF. Most notable of them being [randomForest](https://CRAN.R-project.org/package=randomForest), which implements Breiman's Random Forests [@breiman2001random] for Classification and
 Regression using the [Fortran](https://fortran-lang.org/). Some of the other packages are [xgboost](https://CRAN.R-project.org/package=xgboost), [randomForestSRC](https://CRAN.R-project.org/package=randomForestSRC), [ranger](https://CRAN.R-project.org/package=ranger), [Rborist](https://CRAN.R-project.org/package=Rborist). For a detailed overview of the we refer the reader to [CRAN Task View: Machine Learning & Statistical Learning](https://cran.r-project.org/web/views/MachineLearning.html). To the best of our knowledge, none of these packages explicitly account for spatial and/or temporal correlation.
 
-Classical RF has been used in geo-spatial and temporal applications (see @saha2021random for references) without making methodological adjustments to assount for spatial dependency. ([CRAN Task View: Analysis of Spatial Data](https://cran.r-project.org/web/views/Spatial.html), [CRAN Task View: Time Series Analysis](https://cran.r-project.org/web/views/TimeSeries.html)). Two recent works that attempt to explicitly use spatial information in RF for prediction purposes, are @hengl2018random ( [GeoMLA](https://github.com/thengl/GeoMLA)) and @georganos2019geographical ( [SpatialML](https://CRAN.R-project.org/package=SpatialML)) (see @saha2021random for details). Both approaches try to account for the dependence structure by incorporating additional spatial covariates, which adversely affects the prediction performance in presence of dominant covariate effect (@saha2021random). Additionally, unlike RF-GLS, these cannot estimate the covariate effect  separately from the spatial effect, which can be of independent interest. The RF for temporal data, proposed in @BASAK2019552, suffer from similar problems.
+Classical RF has been used in geo-spatial and temporal applications (see @saha2021random for references) without making methodological adjustments to assount for spatial dependency. ([CRAN Task View: Analysis of Spatial Data](https://cran.r-project.org/web/views/Spatial.html), [CRAN Task View: Time Series Analysis](https://cran.r-project.org/web/views/TimeSeries.html)). Two recent works that attempt to explicitly use spatial information in RF for prediction purposes, are @hengl2018random ( [GeoMLA](https://github.com/thengl/GeoMLA)) and @georganos2019geographical ( [SpatialML](https://CRAN.R-project.org/package=SpatialML)) (see @saha2021random for details). Both approaches try to account for the dependence structure by incorporating additional spatial covariates, which adversely affects the prediction performance in presence of dominant covariate effect (@saha2021random). Additionally, unlike RF-GLS, these cannot estimate the covariate effect  separately from the spatial effect, which can be of independent interest. The RF for temporal data, proposed in @BASAK2019552, suffer from similar shortcomings.
 
 # The RandomForestsGLS package
 
@@ -49,11 +49,11 @@ In classical RF, which is an average of many regression trees, each node in a re
 $$
 v_{n}^{CART}((d,c)) =  \frac{1}{n} \left( \|\mathbf{Y} - \mathbf Z^{(0)}\boldsymbol{\hat{\beta}}(\mathbf Z^{(0)})\|_2^2 - \|\mathbf Y - \mathbf Z \boldsymbol{\hat{\beta}}(\mathbf Z)\|_2^2 \right).
 $$
-where, $\mathbf Z^{(0)}$ and $\mathbf Z$ are the membersip matrices for the leaf nodes of the tree before and after the potential node split. $(d,c)$ denotes a potential cut (location of the split), with $d$ and $c$ being the cut direction (choice of the covariate) and cutoff point (value of the covariate) respectively, $\boldsymbol{\hat{\beta}} (\mathbf Z)$ are the leaf node representatives given by OLS estimates corresponding to design matrix $\mathbf Z$ and can be written as: 
+where, $\mathbf Z^{(0)}$ and $\mathbf Z$ are the binary membersip matrices for the leaf nodes of the tree before and after the potential node split. $(d,c)$ denotes a potential cut (location of the split), with $d$ and $c$ being the cut direction (choice of the covariate) and cutoff point (value of the covariate) respectively, $\boldsymbol{\hat{\beta}} (\mathbf Z)$ are the leaf node representatives given by OLS estimates corresponding to a design matrix $\mathbf Z$ and can be written as: 
 
 $$\boldsymbol{\hat{\beta}} (\mathbf Z) = \left(\mathbf Z ^\top \mathbf Z \right)^{-1} \mathbf Z ^\top \mathbf y$$
 
-We observe that the split criterion is the difference of OLS loss functions before and after the cut with the design matrix of membership of the leaf nodes. We can incorporate the correlation structure of the data in the split criterion by replacing the OLS loss with GLS loss. The modified split criterion can be rewritten as:
+We observe that the split criterion is the difference of OLS loss functions before and after the cut with the respective design matrices of membership of the leaf nodes. We can incorporate the correlation structure of the data in the split criterion by replacing the OLS loss with GLS loss as is traditionally done in linear models. The modified split criterion can be rewritten as:
 
 $$
 \begin{aligned}
@@ -62,7 +62,7 @@ v_{n,\mathbf Q}^{DART}((d,c)) =
 \end{aligned}
 $$
 
-where, $\mathbf Q$ is the inverse of the working covariance matrix that models the spatial/serial dependence and $\boldsymbol{\hat{\beta}}_{GLS} (\mathbf Z)$ are the leaf node representatives given by the GLS estimates corresponding to design matrix $\mathbf Z$ and can be written as follows:
+where, $\mathbf Q$ is the inverse of the working covariance matrix that models the spatial/serial dependence and $\boldsymbol{\hat{\beta}}_{GLS} (\mathbf Z)$ are the leaf node representatives given by the GLS estimates corresponding to a design matrix $\mathbf Z$ and can be written as follows:
 
 $$\boldsymbol{\hat{\beta}}_{GLS} (\mathbf Z) = \left(\mathbf Z ^\top \mathbf Q \mathbf Z \right)^{-1} \mathbf Z ^\top \mathbf Q \mathbf y.$$
 
@@ -78,7 +78,7 @@ where, $y_i, \mathbf{x}_i$ respectively denotes the observed response and the co
 
 
 ### Fitting & Prediction
-Spatial random effects are modeled using GP as is the practice. We use the computationally convenient Nearest Neighbor Gaussian Process (NNGP) [@nngp]. Model parameters, if unknown, are estimated from the data (@saha2021random). Alongside predicting covariate effects for a new covariate value, we also offer spatial prediction at new locations with a non-linear kriging by combining the non-linear mean estimate and spatial kriging estimate from the [BRISC](https://CRAN.R-project.org/package=BRISC) package.
+Spatial random effects are modeled using GP as is the practice. We use the computationally convenient Nearest Neighbor Gaussian Process (NNGP) [@nngp]. Model parameters, if unknown, are estimated from the data (@saha2021random). Alongside predicting covariate effects for a new covariate value, we also offer spatial prediction at new locations with a non-linear kriging by combining the non-linear mean estimate and spatial kriging estimate from the [BRISC](https://CRAN.R-project.org/package=BRISC) [@brisc] package.
 
 
 ## Autoregressive (AR) Time Series Data
@@ -101,7 +101,7 @@ This package provides an efficient, parallel implementation of the RF-GLS method
 
 # Acknowledgements
 
-AS and AD were supported by NSF award DMS-1915803. SB was supported by an NSF award DMS-1812128, and an NIH award R01GM135926.
+AS and AD were supported by NSF award DMS-1915803. AD was supported by NIEHS award R01ES033739. SB was supported by an NSF award DMS-1812128, and an NIH award R01GM135926.
 
 # References
 
